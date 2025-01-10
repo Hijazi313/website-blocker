@@ -15,6 +15,7 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
+/** @type {import('eslint').Linter.FlatConfig[]} */
 export default [
   js.configs.recommended,
   ...compat.extends(
@@ -23,10 +24,10 @@ export default [
     'plugin:react-hooks/recommended'
   ),
   {
-    ignores: ['dist/**', 'node_modules/**'],
+    ignores: ['dist/**', 'node_modules/**', '*.d.ts'],
   },
   {
-    files: ['**/*.{ts,tsx}'],
+    files: ['src/**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
@@ -56,8 +57,29 @@ export default [
     },
     settings: {
       react: {
-        version: 'detect',
+        version: '18.2.0',
       },
+    },
+  },
+  {
+    files: ['*.js'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+    },
+  },
+  {
+    files: ['*.ts', '*.config.ts'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      parser: tsParser,
+      parserOptions: {
+        project: './tsconfig.node.json',
+      },
+    },
+    plugins: {
+      '@typescript-eslint': tsPlugin,
     },
   },
 ];
