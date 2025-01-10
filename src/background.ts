@@ -19,7 +19,8 @@ const normalizeUrl = (url: string): string => {
 const createBlockRule = (site: BlockedSite, ruleId: number): chrome.declarativeNetRequest.Rule => {
   const domain = normalizeUrl(site.url);
   const timeLeft = Math.ceil((site.endTime - Date.now()) / (60 * 1000));
-  const blockPageUrl = chrome.runtime.getURL('index.html') + 
+  const blockPageUrl =
+    chrome.runtime.getURL('index.html') +
     `#blocked?site=${encodeURIComponent(site.url)}&timeLeft=${timeLeft}`;
 
   return {
@@ -28,13 +29,13 @@ const createBlockRule = (site: BlockedSite, ruleId: number): chrome.declarativeN
     action: {
       type: chrome.declarativeNetRequest.RuleActionType.REDIRECT,
       redirect: {
-        url: blockPageUrl
-      }
+        url: blockPageUrl,
+      },
     },
     condition: {
       urlFilter: `||${domain}/*`,
-      resourceTypes: [chrome.declarativeNetRequest.ResourceType.MAIN_FRAME]
-    }
+      resourceTypes: [chrome.declarativeNetRequest.ResourceType.MAIN_FRAME],
+    },
   };
 };
 
@@ -43,33 +44,33 @@ const updateBlockingRules = async (): Promise<void> => {
   try {
     const preferences = await loadUserPreferences();
     const now = Date.now();
-    
+
     // Filter out expired blocks
     const activeBlocks: BlockedSite[] = preferences.blockedSites.filter(site => site.endTime > now);
-    
+
     // Remove all existing rules
     await chrome.declarativeNetRequest.updateDynamicRules({
-      removeRuleIds: Array.from({ length: currentRuleId }, (_, i) => i + 1)
+      removeRuleIds: Array.from({ length: currentRuleId }, (_, i) => i + 1),
     });
-    
+
     // Add new rules for active blocks
     const rules: chrome.declarativeNetRequest.Rule[] = activeBlocks.map((site, index) => {
       return createBlockRule(site, index + 1);
     });
-    
+
     if (rules.length > 0) {
       currentRuleId = rules.length;
       await chrome.declarativeNetRequest.updateDynamicRules({
-        addRules: rules
+        addRules: rules,
       });
       console.log('Updated blocking rules:', rules);
     }
-    
+
     // Update storage if we removed any expired blocks
     if (activeBlocks.length !== preferences.blockedSites.length) {
       await saveUserPreferences({
         ...preferences,
-        blockedSites: activeBlocks
+        blockedSites: activeBlocks,
       });
       console.log('Cleaned up expired blocks');
     }
@@ -84,7 +85,7 @@ chrome.runtime.onInstalled.addListener(async () => {
   try {
     await saveUserPreferences({
       blockedSites: [],
-      timeTracking: {}
+      timeTracking: {},
     });
     await updateBlockingRules();
     console.log('Storage initialized');

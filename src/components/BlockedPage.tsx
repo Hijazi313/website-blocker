@@ -13,7 +13,7 @@ const BlockedPage = () => {
     document.body.style.width = '100vw';
     document.body.style.height = '100vh';
     document.body.style.overflow = 'hidden';
-    
+
     const loadBlockedInfo = async () => {
       try {
         // Get the blocked site from the URL hash
@@ -26,7 +26,7 @@ const BlockedPage = () => {
         // Load preferences to get the actual block info
         const preferences = await loadUserPreferences();
         const siteInfo = preferences.blockedSites.find(s => s.url === siteUrl);
-        
+
         if (siteInfo && siteInfo.endTime > Date.now()) {
           setBlockedSite(siteInfo);
         } else {
@@ -77,7 +77,7 @@ const BlockedPage = () => {
   const remainingTime = getRemainingTime();
 
   return (
-    <div 
+    <div
       style={{
         width: '100vw',
         height: '100vh',
@@ -86,7 +86,7 @@ const BlockedPage = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#f3f4f6'
+        backgroundColor: '#f3f4f6',
       }}
     >
       <div className="max-w-md w-full mx-auto bg-white rounded-xl shadow-lg p-8 text-center m-4">
@@ -105,15 +105,11 @@ const BlockedPage = () => {
             />
           </svg>
         </div>
-        
-        <h1 className="text-2xl font-bold text-gray-900 mb-4">
-          Access Blocked
-        </h1>
-        
+
+        <h1 className="text-2xl font-bold text-gray-900 mb-4">Access Blocked</h1>
+
         <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
-          <p className="text-red-800 font-medium">
-            {blockedSite.url}
-          </p>
+          <p className="text-red-800 font-medium">{blockedSite.url}</p>
         </div>
 
         <p className="text-gray-600 mb-6">

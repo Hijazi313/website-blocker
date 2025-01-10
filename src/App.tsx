@@ -38,7 +38,7 @@ function App() {
 
   const handleAddSite = async (url: string, timeBlocked: number) => {
     const normalizedUrl = normalizeUrl(url);
-    
+
     // Check if site is already blocked
     if (blockedSites.some(site => normalizeUrl(site.url) === normalizedUrl)) {
       console.log('Site is already blocked:', normalizedUrl);
@@ -50,23 +50,23 @@ function App() {
       url: normalizedUrl,
       timeBlocked,
       startTime: now,
-      endTime: now + timeBlocked * 60 * 1000 // Convert minutes to milliseconds
+      endTime: now + timeBlocked * 60 * 1000, // Convert minutes to milliseconds
     };
-    
+
     console.log('Adding new blocked site:', newSite);
     const updatedSites = [...blockedSites, newSite];
     setBlockedSites(updatedSites);
-    
+
     try {
-      await saveUserPreferences({ 
+      await saveUserPreferences({
         blockedSites: updatedSites,
         timeTracking: {
           ...timeTracking,
           [normalizedUrl]: {
-            totalTimeBlocked: (timeTracking[normalizedUrl]?.totalTimeBlocked || 0),
-            lastBlocked: now
-          }
-        }
+            totalTimeBlocked: timeTracking[normalizedUrl]?.totalTimeBlocked || 0,
+            lastBlocked: now,
+          },
+        },
       });
       console.log('Successfully saved preferences');
     } catch (error) {
@@ -79,26 +79,26 @@ function App() {
     console.log('Removing site:', normalizedUrl);
     const updatedSites = blockedSites.filter(site => normalizeUrl(site.url) !== normalizedUrl);
     setBlockedSites(updatedSites);
-    
+
     try {
       const updatedTimeTracking = { ...timeTracking };
       const removedSite = blockedSites.find(site => normalizeUrl(site.url) === normalizedUrl);
-      
+
       if (removedSite) {
-        const timeSpentBlocked = Math.min(
-          Date.now() - removedSite.startTime,
-          removedSite.timeBlocked * 60 * 1000
-        ) / (60 * 1000); // Convert to minutes
-        
+        const timeSpentBlocked =
+          Math.min(Date.now() - removedSite.startTime, removedSite.timeBlocked * 60 * 1000) /
+          (60 * 1000); // Convert to minutes
+
         updatedTimeTracking[normalizedUrl] = {
-          totalTimeBlocked: (updatedTimeTracking[normalizedUrl]?.totalTimeBlocked || 0) + timeSpentBlocked,
-          lastBlocked: Date.now()
+          totalTimeBlocked:
+            (updatedTimeTracking[normalizedUrl]?.totalTimeBlocked || 0) + timeSpentBlocked,
+          lastBlocked: Date.now(),
         };
       }
-      
-      await saveUserPreferences({ 
+
+      await saveUserPreferences({
         blockedSites: updatedSites,
-        timeTracking: updatedTimeTracking
+        timeTracking: updatedTimeTracking,
       });
       setTimeTracking(updatedTimeTracking);
       console.log('Successfully removed site and updated time tracking');
@@ -129,12 +129,9 @@ function App() {
 
       {blockedSites.length > 0 && (
         <div className="bg-white rounded-xl shadow-sm p-6">
-          <BlockedSitesList
-            sites={blockedSites}
-            onRemove={handleRemoveSite}
-          />
+          <BlockedSitesList sites={blockedSites} onRemove={handleRemoveSite} />
           <div className="mt-6 space-y-4">
-            {blockedSites.map((site) => (
+            {blockedSites.map(site => (
               <div key={site.url} className="bg-gray-50 p-4 rounded-lg">
                 <div className="font-medium text-gray-900 mb-2">{site.url}</div>
                 <Timer

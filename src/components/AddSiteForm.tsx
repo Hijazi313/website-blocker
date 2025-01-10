@@ -34,7 +34,10 @@ const AddSiteForm: React.FC<AddSiteFormProps> = ({ onAdd }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-6 bg-white rounded-lg p-6 shadow-sm border border-gray-200"
+    >
       <div className="flex gap-2">
         <div className="flex-1">
           <label htmlFor="url" className="block text-sm font-medium text-gray-700 mb-1">
@@ -45,7 +48,7 @@ const AddSiteForm: React.FC<AddSiteFormProps> = ({ onAdd }) => {
               type="text"
               id="url"
               value={url}
-              onChange={(e) => setUrl(e.target.value)}
+              onChange={e => setUrl(e.target.value)}
               placeholder="e.g., facebook.com"
               className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
               required
@@ -84,7 +87,7 @@ const AddSiteForm: React.FC<AddSiteFormProps> = ({ onAdd }) => {
             type="number"
             id="hours"
             value={hours}
-            onChange={(e) => setHours(Math.max(0, parseInt(e.target.value) || 0))}
+            onChange={e => setHours(Math.max(0, parseInt(e.target.value) || 0))}
             min="0"
             className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
           />
@@ -97,7 +100,7 @@ const AddSiteForm: React.FC<AddSiteFormProps> = ({ onAdd }) => {
             type="number"
             id="minutes"
             value={minutes}
-            onChange={(e) => setMinutes(Math.max(0, Math.min(59, parseInt(e.target.value) || 0)))}
+            onChange={e => setMinutes(Math.max(0, Math.min(59, parseInt(e.target.value) || 0)))}
             min="0"
             max="59"
             className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"

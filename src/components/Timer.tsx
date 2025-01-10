@@ -15,7 +15,7 @@ const Timer: React.FC<TimerProps> = ({ duration, onComplete }) => {
     }
 
     const timer = setInterval(() => {
-      setTimeLeft((prev) => prev - 1);
+      setTimeLeft(prev => prev - 1);
     }, 1000);
 
     return () => clearInterval(timer);
@@ -43,9 +43,7 @@ const Timer: React.FC<TimerProps> = ({ duration, onComplete }) => {
   return (
     <div className="relative pt-1">
       <div className="flex items-center justify-center mb-2">
-        <div className="text-2xl font-bold text-blue-600">
-          {formatTime(timeLeft)}
-        </div>
+        <div className="text-2xl font-bold text-blue-600">{formatTime(timeLeft)}</div>
       </div>
       <div className="overflow-hidden h-2 text-xs flex rounded bg-blue-100">
         <div

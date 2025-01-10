@@ -19,7 +19,7 @@ export const saveUserPreferences = (preferences: UserPreferences): Promise<void>
 
 export const loadUserPreferences = (): Promise<UserPreferences> => {
   return new Promise((resolve, reject) => {
-    chrome.storage.sync.get(['userPreferences'], (result) => {
+    chrome.storage.sync.get(['userPreferences'], result => {
       if (chrome.runtime.lastError) {
         reject(chrome.runtime.lastError);
       } else {
@@ -37,9 +37,7 @@ export const addBlockedSite = async (site: BlockedSite): Promise<void> => {
 
 export const removeBlockedSite = async (url: string): Promise<void> => {
   const preferences = await loadUserPreferences();
-  preferences.blockedSites = preferences.blockedSites.filter(
-    (site) => site.url !== url
-  );
+  preferences.blockedSites = preferences.blockedSites.filter(site => site.url !== url);
   await saveUserPreferences(preferences);
 };
 

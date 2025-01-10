@@ -10,7 +10,7 @@ const BlockedSitesList: React.FC<BlockedSitesListProps> = ({ sites, onRemove }) 
   const formatDuration = (minutes: number) => {
     const hours = Math.floor(minutes / 60);
     const remainingMinutes = minutes % 60;
-    
+
     if (hours > 0) {
       return `${hours}h ${remainingMinutes}m`;
     }
@@ -18,18 +18,14 @@ const BlockedSitesList: React.FC<BlockedSitesListProps> = ({ sites, onRemove }) 
   };
 
   if (sites.length === 0) {
-    return (
-      <div className="mt-6 text-center text-gray-500">
-        No websites are currently blocked
-      </div>
-    );
+    return <div className="mt-6 text-center text-gray-500">No websites are currently blocked</div>;
   }
 
   return (
     <div className="mt-6">
       <h2 className="text-lg font-semibold text-gray-900 mb-4">Blocked Sites</h2>
       <div className="space-y-3">
-        {sites.map((site) => (
+        {sites.map(site => (
           <div
             key={site.url}
             className="flex items-center justify-between bg-gray-50 p-4 rounded-lg border border-gray-200 hover:bg-gray-100 transition-colors duration-200"
