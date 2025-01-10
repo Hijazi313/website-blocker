@@ -3,7 +3,7 @@
   "private": false,
   "version": "1.0.0",
   "type": "module",
-  "description": "A Chrome extension to block distracting websites and stay focused",
+  "description": "A powerful Chrome extension that helps you stay focused by blocking distracting websites. Built with React, TypeScript, and modern web technologies, it features a sleek UI, customizable block durations, and real-time URL capture for effortless site blocking.",
   "author": "Muhammad Hamza Asif",
   "license": "MIT",
   "keywords": [
