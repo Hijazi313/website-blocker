@@ -1,0 +1,102 @@
+# ------------------------------------------
+# Cursor Code Editor Rules for Website Blocker
+# ------------------------------------------
+
+# ------------------------------------------
+# General Configuration
+# ------------------------------------------
+language: typescript # Set the primary language as TypeScript
+
+# ------------------------------------------
+# Coding Standards
+# ------------------------------------------
+coding-standards:
+  - use-typescript: true # Enforce TypeScript for type safety and maintainability
+  - follow-airbnb-style: true # Adhere to the Airbnb JavaScript Style Guide
+  - single-responsibility: true # Each function/component should have a single responsibility
+  - es6-features:
+      - arrow-functions: true # Use arrow functions
+      - destructuring: true # Use destructuring assignments
+      - async-await: true # Use async/await for asynchronous code
+  - comments:
+      style: clear # Comments should explain the why, not just the what
+
+# ------------------------------------------
+# Naming Conventions
+# ------------------------------------------
+naming-conventions:
+  file-names:
+    - camelCase: true # Files should be in camelCase (e.g., myComponent.ts)
+  variable-names:
+    - camelCase: true # Use camelCase for variables
+  component-names:
+    - PascalCase: true # Use PascalCase for React components
+  constant-names:
+    - UPPER_SNAKE_CASE: true # Use UPPER_SNAKE_CASE for constants
+
+# ------------------------------------------
+# Use of Libraries and Dependencies
+# ------------------------------------------
+libraries:
+  keep-up-to-date: true # Regularly update dependencies and check for vulnerabilities
+  only-necessary: true # Use only the libraries that are essential
+  security-check:
+    review-documentation: true # Review library documentation and community feedback
+
+# ------------------------------------------
+# Chrome Extension Specific Rules
+# ------------------------------------------
+chrome-extension:
+  storage-api:
+    use-responsibly: true # Minimize stored data and encrypt sensitive information
+  content-scripts:
+    inject-carefully: true # Ensure content scripts only run on necessary pages
+  security-guidelines:
+    content-security-policy: true # Follow security guidelines to prevent XSS attacks
+
+# ------------------------------------------
+# Testing and Quality Assurance
+# ------------------------------------------
+testing:
+  unit-tests: true # Write unit tests for all components and utility functions
+  test-framework: jest # Use Jest as the testing framework
+  manual-testing: true # Conduct manual testing in Chrome
+  security-reviews: true # Perform security assessments and vulnerability scans
+
+# ------------------------------------------
+# Documentation and User Feedback
+# ------------------------------------------
+documentation:
+  maintain-updated: true # Keep docs and README files clear and accurate
+  enable-user-feedback: true # Allow users to report bugs and suggest features
+
+# ------------------------------------------
+# Deployment and Maintenance
+# ------------------------------------------
+deployment:
+  semantic-versioning: true # Use semantic versioning for releases (e.g., v1.0.0)
+  test-different-environments: true # Test the extension in various environments before deployment
+  monitor-feedback: true # Monitor user feedback post-launch for updates
+  maintenance-checks:
+    regular-schedule: true # Schedule regular maintenance to update dependencies
+
+# ------------------------------------------
+# Development Workflow
+# ------------------------------------------
+development-workflow:
+  version-control:
+    use-git: true # Use Git for version control
+  feature-branches: true # Create feature branches for new functionalities
+  code-reviews: true # Conduct code reviews for all pull requests
+  continuous-integration:
+    use-ci-tools: true # Use CI tools for automated testing and deployment
+
+# ------------------------------------------
+# Rules Application
+# ------------------------------------------
+apply-rules:
+  enforce: true # Enforce the above rules in development
+
+# ------------------------------------------
+# End of Cursor Rules File
+# ------------------------------------------

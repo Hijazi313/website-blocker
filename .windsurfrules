@@ -1,0 +1,120 @@
+# WindSurf Rules Configuration for Website Blocker Chrome Extension
+
+# ------------------------------------------
+# Project Structure
+# ------------------------------------------
+source='website-blocker/src'
+dist='website-blocker/dist'
+public='website-blocker/public'
+
+# Watch for changes in the following directories
+watch:
+  - src/
+  - public/
+
+# ------------------------------------------
+# Build Tasks
+# ------------------------------------------
+# Define build tasks for TypeScript files
+build:
+  typescript:
+    source: '**/*.ts'
+    output: dist/
+
+# Bundle React components
+react:
+  source: 'src/components/**/*.tsx'
+  output: dist/components
+
+# Handle the main app component
+app:
+  source: 'src/App.tsx'
+  output: dist/
+
+# Handle the service worker
+background:
+  source: 'src/background.ts'
+  output: dist/
+
+# Copy static assets from public directory to dist
+assets:
+  source: 'public/**/*'
+  output: dist/
+
+# ------------------------------------------
+# Coding Standards
+# ------------------------------------------
+coding-standards:
+  - Use TypeScript for type safety and improved maintainability.
+  - Follow the Airbnb JavaScript Style Guide for consistency.
+  - Keep functions and components small and focused (Single Responsibility Principle).
+  - Utilize ES6+ features (e.g., arrow functions, destructuring, async/await).
+  - Comment code clearly - explain why, not just what.
+
+# ------------------------------------------
+# Use of Libraries and Dependencies
+# ------------------------------------------
+libraries-dependencies:
+  - Keep dependencies up-to-date: Regularly check for updates and security vulnerabilities.
+  - Use only necessary libraries: Avoid bloating the project with unused libraries.
+  - Ensure all third-party code is secure: Review library documentation and community feedback.
+
+# ------------------------------------------
+# Chrome Extension Specific Rules
+# ------------------------------------------
+chrome-extension-rules:
+  - Use Chrome Storage API responsibly: Minimize the amount of data stored and ensure sensitive data is encrypted.
+  - Implement content scripts carefully: Ensure they are only injected on pages where necessary.
+  - Follow the Chrome extension security guidelines: Utilize `content_security_policy` in manifest.json to prevent XSS attacks.
+
+# ------------------------------------------
+# Testing and Quality Assurance
+# ------------------------------------------
+testing-quality-assurance:
+  - Write unit tests for all components and utility functions.
+  - Use a test framework like Jest or Mocha for JavaScript testing.
+  - Conduct manual testing in Chrome to ensure functionality works as expected.
+  - Conduct security reviews and vulnerability scans.
+
+# ------------------------------------------
+# Documentation and User Feedback
+# ------------------------------------------
+documentation-user-feedback:
+  - Maintain updated documentation: Keep code comments, README files, and usage instructions clear and accurate.
+  - Enable user feedback mechanisms: Allow users to report bugs and suggest features.
+
+# ------------------------------------------
+# Deployment and Maintenance
+# ------------------------------------------
+deployment-maintenance:
+  - Use semantic versioning for releases (e.g., v1.0.0).
+  - Test the extension in different environments before deployment.
+  - Monitor user feedback post-launch and implement necessary updates.
+  - Schedule regular maintenance checks to update dependencies and fix bugs.
+
+# ------------------------------------------
+# Development Workflow
+# ------------------------------------------
+development-workflow:
+  - Use Git for version control: Commit changes with clear, descriptive messages.
+  - Create feature branches for new functionalities.
+  - Conduct code reviews for all pull requests.
+  - Use continuous integration (CI) tools to automate testing and deployment.
+
+# ------------------------------------------
+# Final Configuration
+# ------------------------------------------
+done:
+  message: 'Build completed successfully!'
+
+# Notify the user about missing configurations
+missing:
+  notify: true
+  message: 'Please check for missing components or configurations.'
+
+# Provide detailed instructions on conventions
+instructions:
+  - "Follow the coding conventions outlined in this file."
+  - "Ensure all files follow the naming conventions specified above."
+  - "Use the appropriate linting commands to maintain code quality."
+  - "Run tests regularly to ensure functionality remains intact."
